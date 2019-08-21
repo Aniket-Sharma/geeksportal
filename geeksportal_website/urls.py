@@ -24,4 +24,5 @@ urlpatterns = [
     path('home/', HomePageView.as_view(), name='home'),
     path('index/', IndexPageView.as_view(), name='index'),
     path('language/', ChangeLanguageView.as_view(), name='change_language'),
+    path('home/forum/post/<int:post_id>', HomePageView.as_view(), name='post_reply'),
 ]

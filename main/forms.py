@@ -6,7 +6,7 @@ class ForumPostForm(forms.ModelForm):
 
     class Meta:
         model = ForumPost
-        fields = ('title', 'post')
+        fields = ('title', 'post',)
 
         widgets = {
             'title': forms.Textarea(attrs={'placeholder': 'Title of your post'}),

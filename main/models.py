@@ -4,7 +4,7 @@ from django.db import models
 
 
 class ForumPost(models.Model):
-    user = models.CharField(max_length=100)
+    sender = models.CharField(max_length=100, primary_key=False)
     title = models.TextField(null=True, blank=True)
     post = models.TextField(null=True, blank=True)
     posted_at = models.DateTimeField(auto_now_add=True)
@@ -12,17 +12,17 @@ class ForumPost(models.Model):
     down_vote = models.IntegerField(default=0)
 
     def __str__(self):
-        return str(self.user)+' : '+str(self.title)
+        return str(self.sender)+' : '+str(self.title)
 
 
 class ForumPostReply(models.Model):
-    forum_post = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
+    forum_post = models.ForeignKey(ForumPost, on_delete=models.CASCADE, null=True, blank=True)
     user = models.CharField(max_length=100)
-    post = models.TextField()
+    post = models.TextField(null=True, blank=True)
     posted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.user) + ' replying to : ' + str(self.post)
+        return str(self.user)
 
 
 
