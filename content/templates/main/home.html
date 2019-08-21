@@ -2,8 +2,26 @@
 
 {% load i18n %}
 
+{% load bootstrap4 %}
+
 {% load static %}
 
 {% block content %}
+
+    <div class="Post">
+        {% csrf_token %}
+        <form id="post-form" action="{% url 'home' %}" method="post" role="form">
+            {% bootstrap_form post_form %}
+            {% if request.user.is_authenticated %}
+                <button class="btn btn-success" type="submit">Post Publicly</button>
+            {% else %}
+            <h6><a href="{% url 'accounts:log_in' %}">Sign in</a> to post anything</h6>
+            {% endif %}
+        </form>
+        <form id="post-reply-form" action="{% url 'home' %}" method="post" role="form">
+            <input type="hidden" name="username" value="{{ request.user.username }}">
+            {% bootstrap_form reply_form  size="small" show_label=True %}
+        </form>
+    </div>
 
 {% endblock %}
