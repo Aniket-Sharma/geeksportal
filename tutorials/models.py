@@ -5,13 +5,13 @@ from django.db import models
 
 
 class Series(models.Model):
-    SERIES_TYPES = (('VIDEO', 'Video'), ('TEXT', 'Text'))
+    SERIES_TYPES = (('VIDEO', 'Video'), ('TEXT', 'Text'), ('BOTH', 'Video and Text Combined'))
 
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     tutor = models.CharField(max_length=100, blank=True, null=True)
     price = models.PositiveIntegerField(default=1999)
-    subscribed_users = models.TextField(null=True, blank=True, editable=False)
+    subscribed_users = models.TextField(null=True, blank=True, editable=True)
     number_of_tuts = models.PositiveSmallIntegerField(null=True, blank=True)
     template = models.ImageField(null=True, blank=True, upload_to='content/media/images/template_images/')
     template_link = models.URLField(null=True, blank=True)

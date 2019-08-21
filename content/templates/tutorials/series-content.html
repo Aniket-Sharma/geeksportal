@@ -1,0 +1,26 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load static %}
+
+{% load i18n %}
+
+{% block content %}
+
+    {% for tut in text_tutorials %}
+
+        <div class="Text-Tutorial">
+            <h1>{{ tut.title }}</h1><h5>{{ tut.description|safe }}</h5><p>{{ tut.lesson|safe }}</p>
+        </div>
+
+    {% endfor %}
+    <hr>
+    {% for tut in video_tutorials %}
+
+        <div class="Video-Tutorial">
+            <h1>{{ tut.title }}</h1><h5>{{ tut.description|safe }}</h5><p>{{tut.video_link}}</p>
+            <embed src={{tut.video_link}}>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

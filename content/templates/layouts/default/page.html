@@ -32,7 +32,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand" href= "#">{% trans 'Geeksportal' %}</a>
+    <a class="navbar-brand" href= "{% url 'index' %}">{% trans 'Geeksportal' %}</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
         <span class="navbar-toggler-icon"></span>
@@ -41,14 +41,14 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav ">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:log_in' %}">{% trans '' %}</a>
+                <a class="nav-link" href="{% url 'tut_index' %}">{% trans 'Tutorials' %}</a>
             </li>
             {% if request.user.is_authenticated %}
                 <li class="nav-item-dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="True" aria-expanded="false">My Account</a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="#">Report Card</a>
-                      <a class="dropdown-item" href="#">Subscriptions</a>
+                      <a class="dropdown-item" href="{% url 'tut_index' %}">Subscriptions</a>
                       <a class="dropdown-item" href="#">Activity log</a>
                         <div class = "dropdown-divider"></div>
                       <a class="dropdown-item" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>
