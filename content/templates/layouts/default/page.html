@@ -25,6 +25,22 @@
     <link href="{% static 'vendor/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
 
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <style>
+    .zoom {
+            border: 0.5px groove; 
+            border-radius: 10px;
+            margin-bottom: 20px;
+            margin-top: 10px; 
+            background-color: rgb(233, 234, 238);
+           } 
+    .zoom:hover {
+        box-shadow:10px 10px 10px grey;
+        transform: scale(1.01);
+        transition-duration: 500ms;
+
+
+    }       
+    </style>
 
 </head>
 
@@ -69,8 +85,7 @@
 		</nav>
 
 	</div>
-
-<div class="container ">
+<div class="container" >
 
     {% bootstrap_messages %}
 

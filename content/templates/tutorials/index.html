@@ -23,19 +23,24 @@
 
                 {% if request.user.username in series.subscribed_users %}
                 
-                    <div class="Registered Tutorials" style="border: 0.5px solid black; border-radius: 10px;box-shadow: 10px 10px 10px grey; margin-bottom: 20px;margin-top: 10px;">
+                    <div class="Registered Tutorials zoom" >
                         <div style="padding: 10px">
-                        <h5> {{series.title}} </h5><h3> {{series.tutor}} </h3><p> {{series.description}} </p>
-                        <h3> {{series.price}}$ only </h3><h5> {{series.number_of_tuts}} lectures in total </h5><h4> {{series.type}} : lectures. </h4>
+                        
+                        <h3><b>{{series.title}}</b> </h3>
+                        <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
+                        <p> {{series.description}} </p>
+                        <h6> {{series.price}}$ only<br>{{series.number_of_tuts}} lectures in total <br> {{series.type}} : lectures. </h5>
                         <a href="{% url 'series_content' series_pk=series.pk %}">Goto to content</a>
                     </div>
                     </div>
                 {% else %}
-                    <div class="Unregistered Tutorials"  style="border: 1px solid rgb(46, 46, 26); border-radius: 10px;box-shadow: 10px 10px 10px grey;margin-bottom: 20px;margin-top: 10px;">
+                    <div class="Unregistered Tutorials zoom" >
                         <div style="padding: 10px">
 
-                        <h5> {{series.title}} </h5><h5> {{series.tutor}} </h5><h5> {{series.description}} </h5>
-                        <h5> {{series.price}} </h5><h5> {{series.number_of_tuts}} </h5><h5> {{series.type}} </h5>
+                                <h3><b>{{series.title}}</b> </h3>
+                                <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
+                                <p> {{series.description}} </p>
+                                <h6> {{series.price}}$ only<br>{{series.number_of_tuts}} lectures in total <br> {{series.type}} : lectures. </h5>
 
                         <form action="{% url 'tut_index' %}" method="post">
                             {% csrf_token %}
@@ -50,12 +55,14 @@
         {% else %}
 
 
-            <div class="Tutorials"  style="border: 1px ; border-radius: 10px;box-shadow: 10px 10px 10px grey;margin-bottom: 20px;margin-top: 10px;">
+            <div class="Tutorials zoom">
                 <div style="padding: 10px">
 
-            <h5> {{series.title}} </h5><h5> {{series.tutor}} </h5><h5> {{series.description}} </h5>
-            <h5> {{series.price}} </h5><h5> {{series.number_of_tuts}} </h5><h5> {{series.type}} </h5>
-                <p><a href="{% url 'accounts:log_in' %}">Sign in</a> to see full details</p>
+                        <h3><b>{{series.title}}</b> </h3>
+                        <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
+                        <p> {{series.description}} </p>
+                        <h6> {{series.price}}$ only<br>{{series.number_of_tuts}} lectures in total <br> {{series.type}} : lectures. </h5>
+                            <p><a href="{% url 'accounts:log_in' %}">Sign in</a> to see full details</p>
                 </div>
             </div>
         {% endif %}
