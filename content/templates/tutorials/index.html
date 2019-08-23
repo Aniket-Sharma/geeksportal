@@ -5,21 +5,35 @@
 {% load i18n %}
 
 {% block content %}
+{% if request.user.is_authenticated %}
+
+{% trans 'Your username is' %} <b>{{ request.user.username }}</b>.
+
+{% else %}
+
+{% trans 'You are a guest.' %}
+<h1>Available Tutorials on our site are </h1>
+
+{% endif %}
 
     {% for series in all_series %}
 
         {% if request.user.is_authenticated %}
 
-            {% trans 'Your username is' %} <b>{{ request.user.username }}</b>.
 
                 {% if request.user.username in series.subscribed_users %}
-                    <div class="Registered Tutorials" style="border: 1px solid black; ">
+                
+                    <div class="Registered Tutorials" style="border: 0.5px solid black; border-radius: 10px;box-shadow: 10px 10px 10px grey; margin-bottom: 20px;margin-top: 10px;">
+                        <div style="padding: 10px">
                         <h5> {{series.title}} </h5><h3> {{series.tutor}} </h3><p> {{series.description}} </p>
                         <h3> {{series.price}}$ only </h3><h5> {{series.number_of_tuts}} lectures in total </h5><h4> {{series.type}} : lectures. </h4>
                         <a href="{% url 'series_content' series_pk=series.pk %}">Goto to content</a>
                     </div>
+                    </div>
                 {% else %}
-                    <div class="Unregistered Tutorials"  style="border: 1px solid yellow; ">
+                    <div class="Unregistered Tutorials"  style="border: 1px solid rgb(46, 46, 26); border-radius: 10px;box-shadow: 10px 10px 10px grey;margin-bottom: 20px;margin-top: 10px;">
+                        <div style="padding: 10px">
+
                         <h5> {{series.title}} </h5><h5> {{series.tutor}} </h5><h5> {{series.description}} </h5>
                         <h5> {{series.price}} </h5><h5> {{series.number_of_tuts}} </h5><h5> {{series.type}} </h5>
 
@@ -29,19 +43,20 @@
                             <input type="text" name="series" value="{{ series.pk }}">
                             <input type="submit" value="register">
                         </form>
-
+                        </div>
                     </div>
                 {% endif %}
 
         {% else %}
 
-            {% trans 'You are a guest.' %}
 
-            <h1>Available Tutorials on our site are </h1>
-            <div class="Tutorials"  style="border: 1px solid lime; ">
+            <div class="Tutorials"  style="border: 1px ; border-radius: 10px;box-shadow: 10px 10px 10px grey;margin-bottom: 20px;margin-top: 10px;">
+                <div style="padding: 10px">
+
             <h5> {{series.title}} </h5><h5> {{series.tutor}} </h5><h5> {{series.description}} </h5>
             <h5> {{series.price}} </h5><h5> {{series.number_of_tuts}} </h5><h5> {{series.type}} </h5>
                 <p><a href="{% url 'accounts:log_in' %}">Sign in</a> to see full details</p>
+                </div>
             </div>
         {% endif %}
 
