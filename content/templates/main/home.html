@@ -7,7 +7,7 @@
 {% load static %}
 
 {% block content %}
-
+<div class="container">
     <div class="Post">
         <form id="post-form" action="{% url 'home' %}" method="post" role="form">
             {% csrf_token %}
@@ -44,5 +44,6 @@
         {% endfor %}
 
     </div>
+</div>
 
 {% endblock %}
