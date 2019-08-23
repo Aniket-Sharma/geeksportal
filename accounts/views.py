@@ -326,6 +326,7 @@ class RestorePasswordDoneView(BasePasswordResetDoneView):
 class LogOutView(LoginRequiredMixin, BaseLogoutView):
     template_name = 'accounts/log_out.html'
 
+
 # # Profile view
 #
 # class ProfileView(LoginRequiredMixin, FormView):

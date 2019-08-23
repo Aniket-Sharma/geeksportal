@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirec
 from django.views.generic import TemplateView
 from django.contrib import messages
 from .models import ForumPost, ForumPostReply
+from tutorials.models import Series
 from .forms import ForumPostForm, ForumReplyForm
 
 
@@ -11,6 +12,15 @@ class IndexPageView(TemplateView):
 
 class ChangeLanguageView(TemplateView):
     template_name = 'main/change_language.html'
+
+
+class ProfileView(TemplateView):
+    template_name = 'main/profile.html'
+
+    def get(self, request):
+        all_series = Series.objects.all()
+        args = {'all_series': all_series}
+        return render(request, self.template_name, args)
 
 
 class HomePageView(TemplateView):

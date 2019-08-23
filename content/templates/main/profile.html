@@ -1,0 +1,24 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+
+    <h4>{% trans 'Your Subscriptions' %}</h4>
+
+    {% for series in all_series %}
+
+        {% if request.user.username in series.subscribed_users %}
+
+            <div class="Registered Tutorials" style="border: 1px solid black; ">
+                <h5> {{series.title}} </h5><h3> {{series.tutor}} </h3><p> {{series.description}} </p>
+                <h5> {{series.number_of_tuts}} lectures in total </h5><h4> {{series.type}} : lectures. </h4>
+                <a href="{% url 'series_content' series_pk=series.pk %}">Goto to content</a>
+            </div>
+
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock %}
