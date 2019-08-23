@@ -5,20 +5,21 @@
 
 {% block content %}
 
-    <h4>{% trans 'Your Subscriptions' %}</h4>
-
-    {% for series in all_series %}
+    <h3>{% trans 'Your Subscriptions' %}</h3><hr>
+    <div class="d-flex" style="flex-wrap: wrap;">
+        {% for series in all_series %}
 
         {% if request.user.username in series.subscribed_users %}
 
-            <div class="Registered Tutorials" style="border: 1px solid black; ">
-                <h5> {{series.title}} </h5><h3> {{series.tutor}} </h3><p> {{series.description}} </p>
-                <h5> {{series.number_of_tuts}} lectures in total </h5><h4> {{series.type}} : lectures. </h4>
-                <a href="{% url 'series_content' series_pk=series.pk %}">Goto to content</a>
+            <div class="Registered Tutorial" style="border: 1px solid black; cursor: pointer;" onclick="window.location='{% url 'series_content' series_pk=series.pk %}' ">
+                <h3><b>{{series.title}}</b> </h3>
+                <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
+                <p> {{series.description}} </p>
             </div>
 
         {% endif %}
 
     {% endfor %}
+    </div>
 
 {% endblock %}

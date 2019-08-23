@@ -9,7 +9,7 @@ class ForumPostForm(forms.ModelForm):
         fields = ('title', 'post',)
 
         widgets = {
-            'title': forms.Textarea(attrs={'placeholder': 'Title of your post'}),
+            'title': forms.Textarea(attrs={'placeholder': 'Title of your post', 'class': 'Title'}),
             'post': forms.Textarea(attrs={'placeholder': 'Write your post (use html tags for effects)'})
         }
 
@@ -21,6 +21,6 @@ class ForumReplyForm(forms.ModelForm):
         fields = ('post',)
 
         widgets = {
-            'post': forms.Textarea(attrs={'placeholder': 'Write a Reply'})
+            'post': forms.Textarea(attrs={'placeholder': 'Write a Reply', 'class': 'Reply'})
         }
 

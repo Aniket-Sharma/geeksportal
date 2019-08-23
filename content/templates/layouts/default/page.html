@@ -5,6 +5,7 @@
 {% get_current_language as language_code %}
 
 <!DOCTYPE html>
+
 <html lang="{{ language_code }}">
 <head>
 
@@ -14,7 +15,7 @@
     <meta name="description" content="An example of Django project with basic user functionality.">
     <meta name="author" content="Yehor Smoliakov">
 
-    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <link rel="icon" href="{% static 'gp.png' %}">
 
     <title>Geeksportal-tutorials for Programmers</title>
 
@@ -24,37 +25,53 @@
 
     <link href="{% static 'vendor/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css?family=Yatra One|Rakkas|BioRhyme|Alegreya|Vollkorn SC" rel="stylesheet">
+
+
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <style>
-    .zoom {
-            border: 0.5px groove; 
-            border-radius: 10px;
-            margin-bottom: 20px;
-            margin-top: 10px; 
-            background-color: rgb(233, 234, 238);
-           } 
-    .zoom:hover {
-        box-shadow:10px 10px 10px grey;
-        transform: scale(1.01);
-        transition-duration: 500ms;
-
-
-    }       
-    </style>
 
 </head>
 
 <body>
+<style>
+    body {
+        background : aliceblue ;
+        font-family : Algereya ;
+    }
 
-<div class = "navbar navbar-dark bg-dark" style="padding-left:6%">
+    #profile and index page css
+
+    .Series {
+        flex-wrap: wrap ;
+        justify-content: space-around ;
+        padding :1% 1% 1% 1% ;
+        font-family : Vollkorn ;
+    }
+    .Tutorial {
+        min-width: 400px ;
+        width : 40% ;
+        padding : 2% 2% 2% 2% ;
+        margin : 2% 2% 2% 2% ;
+        border: 0.5px solid grey;
+        background-color: rgb(233, 234, 238, 0.5);
+        box-shadow : 10px 10px 10px grey ;
+    }
+    .Tutorial:hover {
+        box-shadow:10px 10px 10px black ;
+        transition-duration: 500ms;
+    }
+</style>
+
+<div class = "navbar navbar-dark sticky-top" style="padding-left:6%; padding-right: 6%; margin-bottom: 2% ; background : rgba(57,66,78); font-family: Vollkorn SC">
 		
-			<a class="navbar-brand" href="#" style="color:white; font-size: 1.5rem">Geeks Portal</a>
+			<a class="navbar-brand" href="{% url 'index' %}" style="font-size: 1.5rem">Geeks Portal</a>
 	
-		<nav class="navbar navbar-expand-xl navbar-dark" style="float:right; text-align: center;">
+		<nav class="navbar navbar-expand-xl navbar-dark">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent5" aria-controls="navbarSupportedContent5" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent5">
+
 			<ul class="navbar-nav ">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'tut_index' %}">{% trans 'Tutorials' %}</a>
@@ -62,22 +79,25 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'home' %}">{% trans 'Forum' %}</a>
             </li>
+
             {% if request.user.is_authenticated %}
-                <li class="nav-item-dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="True" aria-expanded="false">My Account</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">Report Card</a>
-                      <a class="dropdown-item" href="#">Subscriptions</a>
-                      <a class="dropdown-item" href="#">Activity log</a>
-                        <div class = "dropdown-divider"></div>
-                      <a class="dropdown-item" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>
-                      <a class="dropdown-item" href="{% url 'accounts:change_profile' %}">{% trans 'Change profile' %}</a>
-                      <a class="dropdown-item" href="{% url 'accounts:change_email' %}">{% trans 'Change email' %}</a>
-                      <a class="dropdown-item" href="{% url 'change_language' %}">{% trans 'Change language' %}</a>
-                        <div class = "dropdown-divider"></div>
-                      <a class="dropdown-item" href="{% url 'accounts:log_out' %}">{% trans 'Log out' %}</a>
-                    </div>
-                </li>
+                <li class="nav-item dropdown" style="margin-left: 10px ;">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{request.user.username}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Report Card</a>
+                  <a class="dropdown-item" href="{% url 'profile' %}">Subscriptions</a>
+                  <a class="dropdown-item" href="#">Activity log</a>
+                    <div class = "dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>
+                  <a class="dropdown-item" href="{% url 'accounts:change_profile' %}">{% trans 'Change profile' %}</a>
+                  <a class="dropdown-item" href="{% url 'accounts:change_email' %}">{% trans 'Change email' %}</a>
+                  <a class="dropdown-item" href="{% url 'change_language' %}">{% trans 'Change language' %}</a>
+                    <div class = "dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'accounts:log_out' %}">{% trans 'Log out' %}</a>
+                </div>
+              </li>
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:log_in' %}">{% trans 'Sign in' %}</a>
@@ -85,10 +105,9 @@
             {% endif %}
         </ul>
     </div>
-</nav>
-
+        </nav>
 	</div>
-<div class="container" >
+<div class="container" style="min-height: 100vh;">
 
     {% bootstrap_messages %}
 
@@ -98,10 +117,130 @@
 
 </div>
 
+<script type="text/javascript">
+		// Create Variables
+		var allOSB = [];
+		var mxh = '';
+
+		window.onload = function() {
+		  // Set Variables
+		  allOSB = document.getElementsByClassName("only-so-big");
+
+		  if (allOSB.length > 0) {
+			mxh = window.getComputedStyle(allOSB[0]).getPropertyValue('max-height');
+			mxh = parseInt(mxh.replace('px', ''));
+
+			// Add read-more button to each OSB section
+			for (var i = 0; i < allOSB.length; i++) {
+			  var el = document.createElement("button");
+			  el.innerHTML = "Read More";
+			  el.setAttribute("type", "button");
+			  el.setAttribute("class", "read-more hid");
+
+			  insertAfter(allOSB[i], el);
+			}
+		  }
+
+		  // Add click function to buttons
+		  var readMoreButtons = document.getElementsByClassName("read-more");
+		  for (var i = 0; i < readMoreButtons.length; i++) {
+			readMoreButtons[i].addEventListener("click", function() {
+			  revealThis(this);
+			}, false);
+		  }
+
+		  // Update buttons so only the needed ones show
+		  updateReadMore();
+		}
+		// Update on resize
+		window.onresize = function() {
+		  updateReadMore();
+		}
+
+		// show only the necessary read-more buttons
+		function updateReadMore() {
+		  if (allOSB.length > 0) {
+			for (var i = 0; i < allOSB.length; i++) {
+			  if (allOSB[i].scrollHeight > mxh) {
+				if (allOSB[i].hasAttribute("style")) {
+				  updateHeight(allOSB[i]);
+				}
+				allOSB[i].nextElementSibling.className = "read-more";
+			  } else {
+				allOSB[i].nextElementSibling.className = "read-more hid";
+			  }
+			}
+		  }
+		}
+
+		function revealThis(current) {
+		  var el = current.previousElementSibling;
+		  if (el.hasAttribute("style")) {
+			current.innerHTML = "Read More";
+			el.removeAttribute("style");
+		  } else {
+			updateHeight(el);
+			current.innerHTML = "Show Less";
+		  }
+		}
+
+		function updateHeight(el) {
+		  el.style.maxHeight = el.scrollHeight + "px";
+		}
+
+		// thanks to karim79 for this function
+		// http://stackoverflow.com/a/4793630/5667951
+		function insertAfter(referenceNode, newNode) {
+			referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+		}
+
+	</script>
+	<style>
+		.only-so-big {
+		  height: 100%;
+		  max-height: 100px;
+		  overflow: hidden;
+		  -webkit-transition: max-height .75s;
+		  transition: max-height .75s;
+		  <!--background : #DDF3ED ;-->
+		}
+
+		.read-more {
+		  background: none;
+		  border: none;
+		  color: #1199f9;
+		  cursor: pointer;
+		  outline: none;
+		  width : 100% ;
+		}
+		.read-more:hover {
+		  text-decoration: underline;
+		}
+		.read-more:focus {
+		  outline: none;
+		}
+		.read-more::-moz-focus-inner {
+		  border: 0;
+		}
+		.hid {
+		  display: none;
+		}
+	</style>
+
 <script src="{% static 'vendor/jquery/jquery-3.3.1.js' %}"></script>
 <script src="{% static 'vendor/popper/popper.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.js' %}"></script>
 <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+
+
+     <!-- all other page content -->
+
+<footer style="padding : 1%;  text-align: center; background: lightgray; width: 100%; margin-bottom: 0 ;">
+	<div class="footer-tagline" style="font-size: 1.5rem; font-family: Rakkas; ">
+        Thankyou for being here.
+    </div>
+    <p class="text-right">Copyright @2019 | Designed by <a href="aniket-sharma.herokuapp.com">Aniket Sharma</a></p>
+</footer>
 
 </body>
 </html>
