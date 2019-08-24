@@ -40,14 +40,15 @@
 </style>
 <div class="container">
 
-    <div id="post-form">
-        <button id="close" onclick="div_hide()">&#10006; Close</button>
+    <div id="post-form" style="text-align: center">
+        <button class="btn btn-danger" id="close" onclick="div_hide()">&#10006;</button>
         <form id="form-post" action="{% url 'home' %}" method="post" role="form">
+            <h3 >New Post</h3><hr>
             {% csrf_token %}
             <input type="hidden" name="username" value="{{ request.user.username }}">
-            {% bootstrap_form post_form  layout="vertical" %}
+            {% bootstrap_form post_form  layout="inline" %}
             {% if request.user.is_authenticated %}
-                <button class="btn btn-success" type="submit">Post Publicly</button>
+                <button class="btn btn-success" type="submit">Send</button>
             {% else %}
                 <h6><a href="{% url 'accounts:log_in' %}">Sign in</a> to post anything</h6>
             {% endif %}
