@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse
 from django.views.generic import TemplateView
 from .models import TextTutorial, VideoTutorial, Series
+from django.contrib import messages
 # Create your views here.
 
 
@@ -18,7 +19,8 @@ class IndexPageView(TemplateView):
         user = request.POST.get('username')
         series.subscribed_users = user + ' ' + series.subscribed_users
         series.save()
-        return HttpResponse('You\'ve successfully subscribed the given tutorial series')
+        messages.success(request, 'You are now registered for %s Tutoral Series' %str(series.title) )
+        return redirect('tut_index')
 
 
 class SeriesContentView(TemplateView):

@@ -21,9 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('subs/', ProfileView.as_view(), name='profile'),
     path('accounts/', include('accounts.urls'), name='accounts'),
-    path('', include('tutorials.urls'), name='tutorial'),
-    path('home/', HomePageView.as_view(), name='home'),
-    path('index/', IndexPageView.as_view(), name='index'),
+    path('tutorials/', include('tutorials.urls'), name='tutorial'),
+    path('forum/', HomePageView.as_view(), name='home'),
+    path('', IndexPageView.as_view(), name='index'),
     path('language/', ChangeLanguageView.as_view(), name='change_language'),
-    path('home/forum/post/<int:post_id>', HomePageView.as_view(), name='post_reply'),
+    path('forum/post/<int:post_id>', HomePageView.as_view(), name='post_reply'),
 ]
