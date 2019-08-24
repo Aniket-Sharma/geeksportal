@@ -19,7 +19,7 @@ from main.views import IndexPageView, ChangeLanguageView, HomePageView, ProfileV
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
-    path('subs/', ProfileView.as_view(), name='profile'),
+    path('profile/', ProfileView.as_view(), name='profile'),
     path('accounts/', include('accounts.urls'), name='accounts'),
     path('tutorials/', include('tutorials.urls'), name='tutorial'),
     path('forum/', HomePageView.as_view(), name='home'),

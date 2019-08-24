@@ -4,7 +4,35 @@
 {% load i18n %}
 
 {% block content %}
-
+<style>
+    .Reply {
+        border : 1px solid grey ;
+        padding : 2% 2% 2% 2% ;
+        background : white ;
+        font-family : BioRhyme;
+    }
+    .Reply:hover{
+        background : lightgrey;
+        cursor : pointer ;
+    }
+    .Posts{
+        padding : 2% 2% 2% 2% ;
+    }
+    .Notifications{
+        min-height : 80vh ;
+    }
+    .Notification{
+        border : 1px solid grey ;
+        padding : 2% 2% 2% 2% ;
+        margin : 1% 0 1% 0 ;
+        background : silver ;
+        font-family : BioRhyme ;
+    }
+    .Notification:hover{
+        background : grey ;
+        cursor: pointer ;
+    }
+</style>
     <div class="Subscriptions" id="mysubscriptions">
     <h3 >Your Subscriptions</h3><hr>
         <div class="d-flex" style="flex-wrap: wrap;">
@@ -25,10 +53,10 @@
     </div>
     <hr>
 
+    <h3>Your Posts</h3><hr>
     <div class="Posts" id="myposts">
-        <h3>Your Posts</h3><hr>
         {% for post in posts %}
-        <div class="post">
+        <div class="Post">
             <h4> {{ post.title|safe }}</h4><p style="text-align: right; "></p>
             <p>{{ post.post|safe }}</p>
         </div>
@@ -39,10 +67,23 @@
 
     <div class="Replies" id="myreplies">
         <h3>Recent Activities </h3><hr>
+        <ul>
         {% for reply in replies %}
-            <div class="Reply">
-                <b>{{ reply.user }}</b> replied to {{ reply.forum_post.sender }}'s post titled : {{reply.forum_post.title }}
-            </div>
+            <li class="Reply">
+                You replied "{{reply.post}}" to <b>{{ reply.forum_post.sender }}'s</b> post titled : "{{reply.forum_post.title }}"
+            </li><br>
         {% endfor %}
+        </ul>
+    </div>
+    <hr>
+    <h3> Notifications </h3><hr>
+    <div class="Notifications" id="mynotifications">
+        <ul>
+        {% for notification in notifications %}
+            <li class="Notification">
+                <b>{{notification.user }}</b> replied "{{notification.post}}" to your post titled: "{{notification.forum_post.title}}"
+            </li>
+        {% endfor %}
+        </ul>
     </div>
 {% endblock %}

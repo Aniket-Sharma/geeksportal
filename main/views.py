@@ -21,7 +21,12 @@ class ProfileView(TemplateView):
         all_series = Series.objects.all()
         posts = ForumPost.objects.filter(sender=request.user.username)
         replies = ForumPostReply.objects.filter(user=request.user.username).order_by('-posted_at')
-        args = {'all_series': all_series, 'posts': posts, 'replies': replies}
+        notifications = ForumPostReply.objects.none()
+        for key in posts:
+            temp = ForumPostReply.objects.all().filter(forum_post=key).order_by('-posted_at')
+            notifications = notifications | temp
+
+        args = {'all_series': all_series, 'posts': posts, 'replies': replies, 'notifications': notifications}
         return render(request, self.template_name, args)
 
 

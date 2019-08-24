@@ -82,13 +82,14 @@
 
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown" style="margin-left: 10px ;">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="{% url 'profile' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{request.user.username}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'profile' %}#myreplies">Activity Log</a>
                   <a class="dropdown-item" href="{% url 'profile' %}#mysubscriptions">Subscriptions</a>
                   <a class="dropdown-item" href="{% url 'profile' %}#myposts">Your Posts</a>
+                  <a class="dropdown-item" href="{% url 'profile' %}#mynotifications">Notifications</a>
+                  <a class="dropdown-item" href="{% url 'profile' %}#myreplies">Activity Log</a>
                     <div class = "dropdown-divider"></div>
                   <a class="dropdown-item" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>
                   <a class="dropdown-item" href="{% url 'accounts:change_profile' %}">{% trans 'Change profile' %}</a>
@@ -239,7 +240,7 @@
 	<div class="footer-tagline" style="font-size: 1.5rem; font-family: Rakkas;">
         Thankyou for being here.
     </div>
-    <p class="text-right" style="font-size:0.8rem;">Copyright @2019 | Designed by <a href="aniket-sharma.herokuapp.com">Aniket Sharma</a></p>
+    <p class="text-right" style="font-size:0.8rem;">Copyright @2019 | Designed by <a href="https://aniket-sharma.herokuapp.com" target="_blank">Aniket Sharma</a></p>
 </footer>
 
 </body>

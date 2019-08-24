@@ -11,7 +11,6 @@ class IndexPageView(TemplateView):
     def get(self, request):
         all_series = Series.objects.all()
         args = {'all_series': all_series}
-        print(all_series)
         return render(request, self.template_name, args)
 
     def post(self, request):

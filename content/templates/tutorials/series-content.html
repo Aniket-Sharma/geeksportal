@@ -5,6 +5,7 @@
 {% load i18n %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
     <style>
         .Text-Lecture {
 
@@ -40,4 +41,7 @@
 
     {% endfor %}
 
+    {% else %}
+    <h3> <a href="{% url 'accounts:log_in' %}">Sign In</a> in to see the contents </h3>
+    {% endif %}
 {% endblock %}
