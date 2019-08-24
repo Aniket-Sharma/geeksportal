@@ -62,11 +62,11 @@
     }
 </style>
 
-<div class = "navbar navbar-dark sticky-top" style="padding-left:6%; padding-right: 6%; margin-bottom: 2% ; background : rgba(57,66,78); font-family: Vollkorn SC">
+<div class = "navbar navbar-light sticky-top" style="padding-left:6%; padding-right: 6%; margin-bottom: 2% ; background : lightgray; font-family: Vollkorn SC; border-bottom: 1px solid black;">
 		
 			<a class="navbar-brand" href="{% url 'index' %}" style="font-size: 1.5rem">Geeks Portal</a>
 	
-		<nav class="navbar navbar-expand-xl navbar-dark">
+		<nav class="navbar navbar-expand-xl navbar-light">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent5" aria-controls="navbarSupportedContent5" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -81,14 +81,14 @@
             </li>
 
             {% if request.user.is_authenticated %}
-                <li class="nav-item dropdown" style="margin-left: 10px ;">
+            <li class="nav-item dropdown" style="margin-left: 10px ;">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{request.user.username}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Report Card</a>
-                  <a class="dropdown-item" href="{% url 'profile' %}">Subscriptions</a>
-                  <a class="dropdown-item" href="#">Activity log</a>
+                  <a class="dropdown-item" href="{% url 'profile' %}#myreplies">Activity Log</a>
+                  <a class="dropdown-item" href="{% url 'profile' %}#mysubscriptions">Subscriptions</a>
+                  <a class="dropdown-item" href="{% url 'profile' %}#myposts">Your Posts</a>
                     <div class = "dropdown-divider"></div>
                   <a class="dropdown-item" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>
                   <a class="dropdown-item" href="{% url 'accounts:change_profile' %}">{% trans 'Change profile' %}</a>

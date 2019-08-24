@@ -19,7 +19,9 @@ class ProfileView(TemplateView):
 
     def get(self, request):
         all_series = Series.objects.all()
-        args = {'all_series': all_series}
+        posts = ForumPost.objects.filter(sender=request.user.username)
+        replies = ForumPostReply.objects.filter(user=request.user.username).order_by('-posted_at')
+        args = {'all_series': all_series, 'posts': posts, 'replies': replies}
         return render(request, self.template_name, args)
 
 

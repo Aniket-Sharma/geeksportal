@@ -5,21 +5,44 @@
 
 {% block content %}
 
-    <h3>{% trans 'Your Subscriptions' %}</h3><hr>
-    <div class="d-flex" style="flex-wrap: wrap;">
+    <div class="Subscriptions" id="mysubscriptions">
+    <h3 >Your Subscriptions</h3><hr>
+        <div class="d-flex" style="flex-wrap: wrap;">
         {% for series in all_series %}
 
-        {% if request.user.username in series.subscribed_users %}
+            {% if request.user.username in series.subscribed_users %}
 
-            <div class="Registered Tutorial" style="border: 1px solid black; cursor: pointer;" onclick="window.location='{% url 'series_content' series_pk=series.pk %}' ">
-                <h3><b>{{series.title}}</b> </h3>
-                <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
-                <p> {{series.description}} </p>
-            </div>
+                <div class="Registered Tutorial" style="border: 1px solid black; cursor: pointer;" onclick="window.location='{% url 'series_content' series_pk=series.pk %}' ">
+                    <h3><b>{{series.title}}</b> </h3>
+                    <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
+                    <p> {{series.description}} </p>
+                </div>
 
-        {% endif %}
+            {% endif %}
 
-    {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <hr>
+
+    <div class="Posts" id="myposts">
+        <h3>Your Posts</h3><hr>
+        {% for post in posts %}
+        <div class="post">
+            <h4> {{ post.title|safe }}</h4><p style="text-align: right; "></p>
+            <p>{{ post.post|safe }}</p>
+        </div>
+        <p> <a href="#">&uArr; {{post.up_vote}}  Upvotes</a>&emsp;<a href="#">&dArr;  {{post.down_vote}} Downvotes</a>&emsp; </p>
+        <hr>
+        {% endfor %}
     </div>
 
+    <div class="Replies" id="myreplies">
+        <h3>Recent Activities </h3><hr>
+        {% for reply in replies %}
+            <div class="Reply">
+                <b>{{ reply.user }}</b> replied to {{ reply.forum_post.sender }}'s post titled : {{reply.forum_post.title }}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
