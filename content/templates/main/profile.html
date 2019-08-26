@@ -33,6 +33,7 @@
         cursor: pointer ;
     }
 </style>
+    {% if request.user.is_authenticated %}
     <div class="Subscriptions" id="mysubscriptions">
     <h3 >Your Subscriptions</h3><hr>
         <div class="d-flex" style="flex-wrap: wrap;">
@@ -69,9 +70,16 @@
         <h3>Recent Activities </h3><hr>
         <ul>
         {% for reply in replies %}
+            {% if reply.user == request.user.username %}
+            <li class="Reply">
+                You replied "{{reply.post}}" to <b>your own </b> post titled : "{{reply.forum_post.title }}"
+            </li>
+            {% else %}
             <li class="Reply">
                 You replied "{{reply.post}}" to <b>{{ reply.forum_post.sender }}'s</b> post titled : "{{reply.forum_post.title }}"
-            </li><br>
+            </li>
+            {% endif %}
+            <br>
         {% endfor %}
         </ul>
     </div>
@@ -86,4 +94,10 @@
         {% endfor %}
         </ul>
     </div>
+
+    {% else %}
+
+        <h3>Please <a href="{% url 'accounts:log_in' %}">Sign in</a> to access your profile. </h3>
+
+    {% endif %}
 {% endblock %}

@@ -23,7 +23,7 @@ class ProfileView(TemplateView):
         replies = ForumPostReply.objects.filter(user=request.user.username).order_by('-posted_at')
         notifications = ForumPostReply.objects.none()
         for key in posts:
-            temp = ForumPostReply.objects.all().filter(forum_post=key).order_by('-posted_at')
+            temp = ForumPostReply.objects.all().filter(forum_post=key).order_by('-posted_at').exclude(user=request.user)
             notifications = notifications | temp
 
         args = {'all_series': all_series, 'posts': posts, 'replies': replies, 'notifications': notifications}
