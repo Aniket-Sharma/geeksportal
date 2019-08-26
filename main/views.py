@@ -1,13 +1,24 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 from django.views.generic import TemplateView
 from django.contrib import messages
-from .models import ForumPost, ForumPostReply
+from .models import ForumPost, ForumPostReply, Contact
 from tutorials.models import Series
-from .forms import ForumPostForm, ForumReplyForm
+from .forms import ForumPostForm, ForumReplyForm, ContactForm
 
 
 class IndexPageView(TemplateView):
     template_name = 'main/index.html'
+
+    def get(self, request):
+        form = ContactForm()
+        args = {'form': form}
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        form = ContactForm(request.POST)
+        form.save()
+        messages.success(request, "Your message was sent successfully !")
+        return redirect('index')
 
 
 class ChangeLanguageView(TemplateView):
@@ -27,6 +38,10 @@ class ProfileView(TemplateView):
             notifications = notifications | temp
 
         args = {'all_series': all_series, 'posts': posts, 'replies': replies, 'notifications': notifications}
+        if request.user.is_superuser:
+            msgs = Contact.objects.all().order_by('-sent_at')
+            args['msgs'] = msgs
+
         return render(request, self.template_name, args)
 
 

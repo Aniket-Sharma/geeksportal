@@ -1,6 +1,7 @@
 {% extends 'layouts/default/page.html' %}
 
 {% load bootstrap4 %}
+
 {% load i18n %}
 
 {% block content %}
@@ -32,7 +33,43 @@
         background : grey ;
         cursor: pointer ;
     }
+    .Message {
+        border : 1px solid black ;
+        padding : 2% 2% 2% 2% ;
+        margin : 1% 0 1% 0 ;
+        background : lightblue ;
+        font-family : BioRhyme ;
+        max-height : 4rem ;
+        overflow: hidden ;
+        cursor : pointer ;
+    }
+    .Message:hover {
+        max-height : 100vh ;
+        transition : 5s ;
+    }
+    .message-body {
+        background : white ;
+        padding : 1% 1% 1% 1% ;
+    }
 </style>
+    {% if request.user.is_superuser %}
+    <hr>
+    <div class="Messages">
+        <h2>Messages</h2><hr>
+        <ul>
+        {% for message in msgs %}
+        <li class="Message">
+            <p><b>{{ message.name }}</b> has sent you a message</p>
+            <div class="message-body">
+                <h6><b>Email</b> : {{ message.email }}</h6><hr>
+                <p>{{ message.message }} </p>
+            </div>
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <hr>
     {% if request.user.is_authenticated %}
     <div class="Subscriptions" id="mysubscriptions">
     <h3 >Your Subscriptions</h3><hr>
@@ -100,4 +137,5 @@
         <h3>Please <a href="{% url 'accounts:log_in' %}">Sign in</a> to access your profile. </h3>
 
     {% endif %}
+
 {% endblock %}
