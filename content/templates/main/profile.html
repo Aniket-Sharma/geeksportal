@@ -33,6 +33,7 @@
         cursor: pointer ;
     }
 </style>
+    {% if user is authenticated %}
     <div class="Subscriptions" id="mysubscriptions">
     <h3 >Your Subscriptions</h3><hr>
         <div class="d-flex" style="flex-wrap: wrap;">
@@ -86,4 +87,8 @@
         {% endfor %}
         </ul>
     </div>
+
+    {% else %}
+        <h3>Please <a href="{% url 'accounts:log_in' %}">Sign in</a> to access your profile. </h3>
+    {% endif %}
 {% endblock %}
