@@ -72,43 +72,46 @@
             onclick="div_show()">Create a New Post</button></h5>
     <hr>
     <div class="All-Posts">
-        {% for post in posts %}
-        <div class="Post">
-            <div class="container" style="background-color: lightgrey ; margin-left: 10px">
 
+        <div class="Post">
+            <div class="container">
+                {% for post in posts %}
                 <h4> <b>{{ post.title|safe }}</b></h4>
                 <p style="text-align: right; ">posted by: <b>{{ post.sender }}</b> at {{ post.posted_at }}</p>
-                <div class="anim">
-                    <p>{{ post.post|safe }}</p>
+                <div>
+                    <p style="background-color: lightgrey ; padding-left: 10px">
+                        {{ post.post|safe }}
+                    </p>
                 </div>
-            </div>
-            <hr>
+                <hr>
 
-            <p> <a href="#">&uArr; {{post.up_vote}} Upvotes</a>&emsp;<a href="#">&dArr; {{post.down_vote}}
-                    Downvotes</a>&emsp; </p>
+                <p> <a href="#">&uArr; {{post.up_vote}} Upvotes</a>&emsp;<a href="#">&dArr; {{post.down_vote}}
+                        Downvotes</a>&emsp; </p>
 
-            <div class="replies only-so-big">
-                <h4>Comments:</h4>
-                {% for reply in replies %}
-                {% if reply.forum_post.pk == post.pk %}
-                <div class="Reply">
-                    [{{ reply.posted_at }}] <b>{{reply.user}}</b> : {{ reply.post|safe }}
+                <div class="replies only-so-big">
+                    <h4>Comments:</h4>
+                    {% for reply in replies %}
+                    {% if reply.forum_post.pk == post.pk %}
+                    <div class="Reply">
+                        [{{ reply.posted_at }}] <b>{{reply.user}}</b> : {{ reply.post|safe }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
-                {% endif %}
+                <form id="post-reply-form" action="{% url 'post_reply' post_id=post.pk %}" method="post" role="form">
+                    {% csrf_token %}
+                    {% bootstrap_form reply_form  size="small" show_label=False %}
+                    {% if request.user.is_authenticated %}
+                    <button class="btn btn-success" type="submit">Post Reply</button>
+                    {% else %}
+                    <h6><a href="{% url 'accounts:log_in' %}">Sign in</a> to post anything</h6>
+                    {% endif %}
+                </form>
+
+                <hr>
                 {% endfor %}
             </div>
-            <form id="post-reply-form" action="{% url 'post_reply' post_id=post.pk %}" method="post" role="form">
-                {% csrf_token %}
-                {% bootstrap_form reply_form  size="small" show_label=False %}
-                {% if request.user.is_authenticated %}
-                <button class="btn btn-success" type="submit">Post Reply</button>
-                {% else %}
-                <h6><a href="{% url 'accounts:log_in' %}">Sign in</a> to post anything</h6>
-                {% endif %}
-            </form>
         </div>
-        <hr>
-        {% endfor %}
     </div>
 </div>
 
