@@ -86,8 +86,9 @@
                 <a class="nav-link dropdown-toggle" href="{% url 'profile' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{request.user.username}}
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'profile' %}#mysubscriptions">Subscriptions</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                  
+					<a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+					<a class="dropdown-item" href="{% url 'profile' %}#mysubscriptions">Subscriptions</a>
                   <a class="dropdown-item" href="{% url 'profile' %}#myposts">Your Posts</a>
                   <a class="dropdown-item" href="{% url 'profile' %}#mynotifications">Notifications</a>
                   <a class="dropdown-item" href="{% url 'profile' %}#myreplies">Activity Log</a>

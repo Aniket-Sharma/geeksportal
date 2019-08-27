@@ -20,6 +20,8 @@ class Series(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta :
+        verbose_name = 'Tutorial Series Name'
 
 class VideoTutorial(models.Model):
     series = models.ForeignKey(Series, on_delete=models.CASCADE)
@@ -33,6 +35,7 @@ class VideoTutorial(models.Model):
         return self.title
 
     class Meta:
+        verbose_name = 'Video Tutorial'
         unique_together = ('series', 'tut_id')
 
 
@@ -50,6 +53,7 @@ class TextTutorial(models.Model):
         return str(self.tut_id) + ' : ' + str(self.title)
 
     class Meta:
+        verbose_name = 'Text Tutorial'
         unique_together = ('series', 'tut_id')
 
 

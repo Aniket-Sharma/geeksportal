@@ -14,15 +14,21 @@ class ForumPost(models.Model):
     def __str__(self):
         return str(self.sender)+' : '+str(self.title)
 
+    class Meta:
+        verbose_name = 'Forum Post'
+
 
 class ForumPostReply(models.Model):
     forum_post = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
     user = models.CharField(max_length=100)
-    post = models.TextField()
+    post = models.CharField(max_length=500)
     posted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str(self.user)
+
+    class Meta:
+        verbose_name = 'Comment'
 
 
 class Contact(models.Model):
@@ -34,6 +40,9 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta : 
+        verbose_name = 'Message'
 
 
 

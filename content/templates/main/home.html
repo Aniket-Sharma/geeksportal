@@ -11,11 +11,10 @@
     #post-form {
         display: none;
         position: fixed;
-        width: 80vw;
-        height: 70vh;
+       
         top: 1;
     }
-
+ 
     #close {
         position: absolute;
         right: -10px;
@@ -36,7 +35,7 @@
     }
 
     .Reply {
-        height: 60px;
+        
     }
 
     .Post {
@@ -49,9 +48,9 @@
         transform: scale(1.01);
     }
 </style>
-<div class="container">
+<div class="container" style="box-align: center">
 
-    <div id="post-form" style="text-align: center">
+    <div id="post-form"  style="text-align: center; float: center; max-width: 100%; min-width: 55%;">
         <button class="btn btn-danger" id="close" onclick="div_hide()">&#10006;</button>
         <form id="form-post" action="{% url 'home' %}" method="post" role="form">
             <h3>New Post</h3>
@@ -78,8 +77,8 @@
                 {% for post in posts %}
                 <h4> <b>{{ post.title|safe }}</b></h4>
                 <p style="text-align: right; ">posted by: <b>{{ post.sender }}</b> at {{ post.posted_at }}</p>
-                <div>
-                    <p style="background-color: lightgrey ; padding-left: 10px">
+                <div style="background-color: lightgrey ; padding-left: 10px">
+                    <p >
                         {{ post.post|safe }}
                     </p>
                 </div>
@@ -93,8 +92,9 @@
                     {% for reply in replies %}
                     {% if reply.forum_post.pk == post.pk %}
                     <div class="Reply">
-                        [{{ reply.posted_at }}] <b>{{reply.user}}</b> : {{ reply.post|safe }}
+                        [{{ reply.posted_at }}] <b>{{reply.user}}</b> : {{ reply.post|safe }}<br>
                     </div>
+                    <hr>
                     {% endif %}
                     {% endfor %}
                 </div>

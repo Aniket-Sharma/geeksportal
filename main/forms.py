@@ -21,7 +21,7 @@ class ForumReplyForm(forms.ModelForm):
         fields = ('post',)
 
         widgets = {
-            'post': forms.Textarea(attrs={'placeholder': 'Write a Reply', 'class': 'Reply'})
+            'post': forms.Textarea(attrs={'placeholder': 'Write a Reply', 'class': 'Reply','size': '40'})
         }
 
 

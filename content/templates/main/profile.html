@@ -60,6 +60,13 @@
         padding: 1% 1% 1% 1%;
     }
 </style>
+
+{% if request.user.is_authenticated %}
+<div style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+        <h3>{{request.user.first_name}} {{request.user.last_name}}</h3>
+        <h6>@{{request.user.username}} {{request.user.email}}</h6>
+        <p>Last login : {{request.user.last_login}}</p>
+    </div>
 {% if request.user.is_superuser %}
 <hr>
 <div class="Messages">
@@ -80,7 +87,6 @@
 </div>
 {% endif %}
 <hr>
-{% if request.user.is_authenticated %}
 <div class="Subscriptions" id="mysubscriptions">
     <h3>Your Subscriptions</h3>
     <hr>
