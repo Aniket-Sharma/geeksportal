@@ -5,15 +5,15 @@
 
 {% block content %}
 
-    <h4>{% trans 'Your profile' %}</h4>
+<h4>{% trans 'Your profile' %}</h4>
 
-    <form method="post">
+<form method="post">
 
-        {% csrf_token %}
-        {% bootstrap_form form layout='inline' %}
+    {% csrf_token %}
+    {% bootstrap_form form layout='inline' %}
 
-        <button class="btn btn-success">{% trans 'Change' %}</button>
+    <button class="btn btn-success">{% trans 'Change' %}</button>
 
-    </form>
+</form>
 
 {% endblock %}

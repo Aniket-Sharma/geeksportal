@@ -9,9 +9,11 @@ from django.utils import timezone
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
+
 class UserCacheMixin:
     user_cache = None
 # from .models import Profile
+
 
 class SignIn(UserCacheMixin, forms.Form):
     password = forms.CharField(label=_('Password'), strip=False, widget=forms.PasswordInput)
@@ -111,7 +113,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = settings.SIGN_UP_FIELDS
 
-    email = forms.EmailField(label=_('Email'),help_text='Enter a valid email address ', widget = forms.TextInput(attrs={'placeholder': 'Email'}))
+    email = forms.EmailField(label=_('Email'), help_text='Enter a valid email address ', widget= forms.TextInput(attrs={'placeholder': 'Email'}))
     username = forms.CharField(max_length=50, label='username',
                                help_text=('This name will be shown to other users in place of your name when you wanna'
                                           'use our services anonymously'),

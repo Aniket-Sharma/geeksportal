@@ -18,54 +18,62 @@
 <!--{% endif %}-->
 
 <div class="Dashboard">
- <h1>Dashboard</h1><hr>
-<div class="d-flex Series" style="flex-wrap: wrap ; justify-content: space-around; ">
-{% for series in all_series %}
+    <h1>Dashboard</h1>
+    <hr>
+    <div class="d-flex Series" style="flex-wrap: wrap ; justify-content: space-around; ">
+        {% for series in all_series %}
 
-    {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
 
-            {% if request.user.username in series.subscribed_users %}
+        {% if request.user.username in series.subscribed_users %}
 
-                <div class="Registered Tutorial zoom" style="cursor: pointer;" onclick="window.location='{% url 'series_content' series_pk=series.pk %}' ">
-                    <img src={{series.template_link}} width="100%"><hr>
-                    <h3><b>{{series.title}}</b> </h3>
-                    <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
-                    <p> {{series.description}} </p>
-                    <button class="btn btn-success"><a href="{% url 'series_content' series_pk=series.pk %}"></a>Continue Practice</button>
-                </div>
-
-            {% else %}
-                <div class="Unregistered Tutorial zoom" style="cursor: pointer;">
-                    <img src={{series.template_link}} width="100%"><hr>
-                    <h3><b>{{series.title}}</b> </h3>
-                    <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
-                    <p> {{series.description}} </p>
-                    <h5> {{series.price}}&#8377; only</h5> <br>{{series.number_of_tuts}} lectures in total <br> Type of Lectures : {{series.type}}
-                    <form action="{% url 'tut_index' %}" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="username" value="{{ request.user.username }}">
-                        <input type="hidden" name="series" value="{{ series.pk }}">
-                        <input class="btn btn-primary" type="submit" value="Register">
-                    </form>
-
-                </div>
-            {% endif %}
-
-    {% else %}
-
-        <div class="Tutorial zoom" style="cursor: pointer;" onclick="window.location='{% url 'accounts:log_in' %}' ">
-            <img src={{series.template_link}} width="100%"><hr>
+        <div class="Registered Tutorial zoom" style="cursor: pointer;"
+            onclick="window.location='{% url 'series_content' series_pk=series.pk %}' ">
+            <img src={{series.template_link}} width="100%">
+            <hr>
             <h3><b>{{series.title}}</b> </h3>
             <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
             <p> {{series.description}} </p>
-            <h5> {{series.price}}&#8377; only<br>{{series.number_of_tuts}} lectures in total <br> Type of Lectures : {{series.type}} </h5>
+            <button class="btn btn-success"><a href="{% url 'series_content' series_pk=series.pk %}"></a>Continue
+                Practice</button>
+        </div>
+
+        {% else %}
+        <div class="Unregistered Tutorial zoom" style="cursor: pointer;">
+            <img src={{series.template_link}} width="100%">
+            <hr>
+            <h3><b>{{series.title}}</b> </h3>
+            <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
+            <p> {{series.description}} </p>
+            <h5> {{series.price}}&#8377; only</h5> <br>{{series.number_of_tuts}} lectures in total <br> Type of Lectures
+            : {{series.type}}
+            <form action="{% url 'tut_index' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{ request.user.username }}">
+                <input type="hidden" name="series" value="{{ series.pk }}">
+                <input class="btn btn-primary" type="submit" value="Register">
+            </form>
+
+        </div>
+        {% endif %}
+
+        {% else %}
+
+        <div class="Tutorial zoom" style="cursor: pointer;" onclick="window.location='{% url 'accounts:log_in' %}' ">
+            <img src={{series.template_link}} width="100%">
+            <hr>
+            <h3><b>{{series.title}}</b> </h3>
+            <h6><em><b>Tutor: </b> {{series.tutor}}</em> </h6>
+            <p> {{series.description}} </p>
+            <h5> {{series.price}}&#8377; only<br>{{series.number_of_tuts}} lectures in total <br> Type of Lectures :
+                {{series.type}} </h5>
             <p><a class="btn btn-success" href="{% url 'accounts:log_in' %}">Sign in</a> to see full details</p>
         </div>
 
-    {% endif %}
+        {% endif %}
 
-{% endfor %}
+        {% endfor %}
 
-</div>
+    </div>
 </div>
 {% endblock %}

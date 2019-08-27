@@ -5,43 +5,46 @@
 {% load i18n %}
 
 {% block content %}
-    {% if request.user.is_authenticated %}
-    <style>
-        .Text-Lecture {
-
-        }
-    </style>
-    {% for tut in text_tutorials %}
-        <div class="d-flex">
-        <div class="Text-Lecture">
-            <h1>{{tut.tut_id}}. {{ tut.title }}</h1><hr>
-            <div class="only-so-big">
-                <h5>{{ tut.description|safe }}</h5><hr><p>{{ tut.lesson|safe }}</p>
-            </div>
-        </div>
-        <!--<div class="Discussion scrollable">-->
-            <!--<h4>Discussion</h4>-->
-
-        <!--</div>-->
-        </div>
+{% if request.user.is_authenticated %}
+<style>
+    .Text-Lecture {}
+</style>
+{% for tut in text_tutorials %}
+<div class="d-flex">
+    <div class="Text-Lecture">
+        <h1>{{tut.tut_id}}. {{ tut.title }}</h1>
         <hr>
-
-    {% endfor %}
-
-    {% for tut in video_tutorials %}
-
-        <div class="Video-Lecture">
-            <h1>{{tut.tut_id}}. {{ tut.title }}</h1>
-            <div class="">
-            <h5>{{ tut.description|safe }}</h5><hr>
-                <iframe src={{tut.video_link}} width="853" height="480" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+        <div class="only-so-big">
+            <h5>{{ tut.description|safe }}</h5>
+            <hr>
+            <p>{{ tut.lesson|safe }}</p>
         </div>
+    </div>
+    <!--<div class="Discussion scrollable">-->
+    <!--<h4>Discussion</h4>-->
+
+    <!--</div>-->
+</div>
+<hr>
+
+{% endfor %}
+
+{% for tut in video_tutorials %}
+
+<div class="Video-Lecture">
+    <h1>{{tut.tut_id}}. {{ tut.title }}</h1>
+    <div class="">
+        <h5>{{ tut.description|safe }}</h5>
         <hr>
+        <iframe src={{tut.video_link}} width="853" height="480" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+<hr>
 
-    {% endfor %}
+{% endfor %}
 
-    {% else %}
-    <h3> <a href="{% url 'accounts:log_in' %}">Sign In</a> in to see the contents </h3>
-    {% endif %}
+{% else %}
+<h3> <a href="{% url 'accounts:log_in' %}">Sign In</a> in to see the contents </h3>
+{% endif %}
 {% endblock %}
