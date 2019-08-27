@@ -6,5 +6,5 @@ from .models import ForumPostReply, ForumPost, Contact
 
 admin.site.register(ForumPost)
 admin.site.register(ForumPostReply)
-admin.site.register(Contact, vervose_name='Message')
+admin.site.register(Contact)
 

@@ -10,9 +10,11 @@
 <style>
     #post-form {
         display: none;
-        position: fixed;
-       
-        top: 1;
+        position: absolute ;
+        width : 60% ;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
  
     #close {
@@ -25,8 +27,8 @@
     #form-post {
         border: 2px solid gray;
         border-radius: 5px;
+        width : 100% ;
         background-color: #fff;
-        width: 100%;
         padding: 1% 1% 1% 1%;
     }
 
@@ -48,9 +50,9 @@
         transform: scale(1.01);
     }
 </style>
-<div class="container" style="box-align: center">
+<div class="container" style="box-align: center;">
 
-    <div id="post-form"  style="text-align: center; float: center; max-width: 100%; min-width: 55%;">
+    <div id="post-form"  style="text-align: center;">
         <button class="btn btn-danger" id="close" onclick="div_hide()">&#10006;</button>
         <form id="form-post" action="{% url 'home' %}" method="post" role="form">
             <h3>New Post</h3>
@@ -118,7 +120,7 @@
 <script>
     //Function To Display Popup
     function div_show() {
-        document.getElementById('post-form').style.display = "block";
+        document.getElementById('post-form').style.display = "flex";
     }
     //Function to Hide Popup
     function div_hide() {
