@@ -5,15 +5,21 @@
 
 {% block content %}
 
-    <h4>{% trans 'Change profile' %}</h4>
+<div style="display:flex;justify-content:center;align-items:center;">
+    <div class="card card-container">
+        <div class="card-body">
+            <h4>{% trans 'Change profile' %}</h4>
 
-    <form method="post">
+            <form method="post">
 
-        {% csrf_token %}
-        {% bootstrap_form form %}
+                {% csrf_token %}
+                {% bootstrap_form form %}
 
-        <button class="btn btn-success">{% trans 'Change' %}</button>
+                <button class="btn btn-success">{% trans 'Change' %}</button>
 
-    </form>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -8,28 +8,30 @@
 
 {% block content %}
 
-    {% if request.user.is_authenticated %}
+{% if request.user.is_authenticated %}
 
-        {% trans 'Your username is' %} <b>{{ request.user.username }}</b>.
+{% trans 'Your username is' %} <b>{{ request.user.username }}</b>.
 
-    {% else %}
+{% else %}
 
-        {% trans 'You are a guest.' %}
+{% trans 'You are a guest.' %}
 
-    {% endif %}
-    <hr>
+{% endif %}
+<hr>
 <style>
     .Contact {
-        border : 1px solid black ;
-        padding : 2% 2% 2% 2% ;
-        margin : 1% 1% 1% 1% ;
-        border-radius : 10px ;
+        border: 1px solid black;
+        padding: 2% 2% 2% 2%;
+        margin: 1% 1% 1% 1%;
+        border-radius: 10px;
     }
 </style>
 <p>This is the main home page of this site . </p>
-<h4>About Section</h4> <hr>
+<h4>About Section</h4>
+<hr>
 <div class="Contact">
-    <h3 style="text-align: center">Contact Us</h3><hr>
+    <h3 style="text-align: center">Contact Us</h3>
+    <hr>
     <form id="contact-form" action="{% url 'index' %}" method="post" role="form">
         {% csrf_token %}
         {% bootstrap_form form show_label=False %}
